@@ -17,9 +17,9 @@ func (f *Function) IsValid() bool {
 }
 
 func (f *Function) Call(p ...interface{}) []reflect.Value {
-	var param []reflect.Value
+	param := make([]reflect.Value, len(p))
 	for i := 0; i < len(p); i++ {
-		param = append(param, reflect.ValueOf(p[i]))
+		param[i] = reflect.ValueOf(p[i])
 	}
 	if len(f.paramIndex) != len(param) { //  如果参数出现不匹配情况那么直接报错 中止程序运行
 		panic(fmt.Sprintf("参数不匹配 需要:%v 实际传入%v",
